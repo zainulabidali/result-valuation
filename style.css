@@ -1,0 +1,28 @@
+.team-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.team-card {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #3a0101;
+  font-weight: 500;
+  min-width: 130px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.team-blue { background-color: #3498db; }
+.team-green { background-color: #27ae60; }
+.clear-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}

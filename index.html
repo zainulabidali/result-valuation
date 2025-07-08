@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Competition Scoring</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+
+    input,
+    select {
+      margin: 5px;
+      padding: 6px;
+    }
+
+    .entry {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .history-entry {
+      margin: 10px 0;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .print-button,
+    .clear-button {
+      margin: 10px 5px;
+      padding: 8px 15px;
+    }
+
+    .scoreboard {
+      margin-top: 30px;
+      padding: 10px;
+      background: #f3f3f3;
+      border: 1px solid #ccc;
+    }
+
+    .scoreboard h3 {
+      margin-bottom: 10px;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #print-section,
+      #print-section * {
+        visibility: visible;
+      }
+
+      #print-section {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>🎯 Competition Score Entry</h2>
+
+  <div class="entry no-print">
+    <label>Category:</label>
+    <select id="category">
+      <option value="">-- Select Category --</option>
+      <option>Sub Junior Boys</option>
+      <option>Sub Junior Girls</option>
+      <option>Junior Boys</option>
+      <option>Junior Girls</option>
+      <option>Senior Boys</option>
+      <option>Senior Girls</option>
+      <option>General Boys</option>
+      <option>General Girls</option>
+    </select><br>
+
+   <label>Event Name:</label>
+<input type="text" id="event" placeholder="e.g. Recitation" /><br><br>
+
+<h4>🥇 First Place</h4>
+<select id="first-team">
+  <option value="">-- Select Team --</option>
+  <option>Hamdhala</option>
+  <option>Basmala</option>
+  
+</select>
+<input type="text" id="first-name" placeholder="Student Name" />
+<input type="text" id="first-chess" placeholder="Chess No." /><br>
+
+<h4>🥈 Second Place</h4>
+<select id="second-team">
+  <option value="">-- Select Team --</option>
+  <option>Hamdhala</option>
+  <option>Basmala</option>
+  
+</select>
+<input type="text" id="second-name" placeholder="Student Name" />
+<input type="text" id="second-chess" placeholder="Chess No." /><br>
+
+<h4>🥉 Third Place</h4>
+<select id="third-team">
+  <option value="">-- Select Team --</option>
+  <option>Hamdhala </option>
+  <option>Basmala</option>
+  
+</select>
+<input type="text" id="third-name" placeholder="Student Name" />
+<input type="text" id="third-chess" placeholder="Chess No." /><br><br>
+
+<button onclick="submitResult()">✅ Submit Result</button>
+
+  </div>
+
+  <hr>
+
+  <div id="print-section">
+    <h3>📋 Result History</h3>
+    <div id="history-list"></div>
+
+ <div class="scoreboard">
+  <h3>📊 Total Team Points</h3>
+  <div id="team-points" class="team-boxes"></div> <!-- ✅ added -->
+</div>
+
+  </div>
+
+  <div class="no-print">
+    <button class="print-button" onclick="window.print()">🖨️ Print Statement</button>
+    <button class="clear-button" onclick="clearHistory()">🗑️ Clear All</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
