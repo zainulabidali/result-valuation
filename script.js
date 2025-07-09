@@ -1,11 +1,9 @@
 let results = JSON.parse(localStorage.getItem('competitionResults')) || [];
-
 const gradePoints = { A: 5, B: 3, C: 1 };
 
 function submitResult() {
   const category = document.getElementById('category').value;
   const event = document.getElementById('event').value;
-
   if (!category || !event) {
     alert('Please fill category and event.');
     return;
@@ -28,30 +26,57 @@ function submitResult() {
     };
   };
 
-  const first = getEntry('first', 5);
-  const second = getEntry('second', 3);
-  const third = getEntry('third', 1);
+  const first = getEntry('first', 10);
+  const second = getEntry('second', 6);
+  const third = getEntry('third', 3);
 
-  const gradeOnly = {
-    team: document.getElementById('grade-only-team').value,
-    name: document.getElementById('grade-only-name').value,
-    chess: document.getElementById('grade-only-chess').value,
-    grade: document.getElementById('grade-only-grade').value,
-    category: category
-  };
+  const gradeOnlyEntries = Array.from(document.querySelectorAll('.grade-only-entry')).map(div => {
+    const [teamSel, nameInput, chessInput, gradeSel] = div.querySelectorAll('select, input');
+    return {
+      team: teamSel.value,
+      name: nameInput.value,
+      chess: chessInput.value,
+      grade: gradeSel.value,
+      category
+    };
+  });
 
   const entry = {
     timestamp: new Date().toISOString(),
     category,
     event,
     results: [first, second, third],
-    gradeOnly
+    gradeOnly: gradeOnlyEntries
   };
 
   results.push(entry);
   localStorage.setItem('competitionResults', JSON.stringify(results));
   displayHistory();
   clearInputs();
+}
+
+function addGradeOnlyEntry() {
+  const container = document.getElementById('grade-only-container');
+  const div = document.createElement('div');
+  div.className = 'grade-only-entry';
+  div.innerHTML = `
+    <label>Team:</label>
+    <select>
+      <option value="">-- Select Team --</option>
+      <option>Hamdhala</option>
+      <option>Basmala</option>
+    </select>
+    <input type="text" placeholder="Student Name" />
+    <input type="text" placeholder="Chess No." />
+    <label>Grade:</label>
+    <select>
+      <option value="">-- Grade --</option>
+      <option>A</option>
+      <option>B</option>
+      <option>C</option>
+    </select><br>
+  `;
+  container.appendChild(div);
 }
 
 function displayHistory() {
@@ -82,7 +107,6 @@ function displayHistory() {
   `;
 
   const tbody = table.querySelector('tbody');
-
   results.forEach(entry => {
     const [first, second, third] = entry.results;
     const row = document.createElement('tr');
@@ -110,10 +134,11 @@ function displayTeamPoints() {
       map[o.team] = (map[o.team] || 0) + o.points;
     });
 
-    const g = r.gradeOnly;
-    if (g && g.team && gradePoints[g.grade]) {
-      map[g.team] = (map[g.team] || 0) + gradePoints[g.grade];
-    }
+    (r.gradeOnly || []).forEach(g => {
+      if (g.team && gradePoints[g.grade]) {
+        map[g.team] = (map[g.team] || 0) + gradePoints[g.grade];
+      }
+    });
   });
 
   const c = document.getElementById('team-points');
@@ -135,22 +160,20 @@ function displayTopPerformers() {
   results.forEach(entry => {
     const category = entry.category;
     entry.results.forEach(r => {
-      const key = `${category}_${r.chess}`;
       if (!r.chess) return;
-
+      const key = `${category}_${r.chess}`;
       if (!studentMap[key]) {
         studentMap[key] = {
           name: r.name,
           chess: r.chess,
-          category,
+          category: category,
           totalPoints: 0
         };
       }
       studentMap[key].totalPoints += r.points;
     });
 
-    const g = entry.gradeOnly;
-    if (g && g.chess && g.category && gradePoints[g.grade]) {
+    (entry.gradeOnly || []).forEach(g => {
       const key = `${g.category}_${g.chess}`;
       if (!studentMap[key]) {
         studentMap[key] = {
@@ -160,8 +183,8 @@ function displayTopPerformers() {
           totalPoints: 0
         };
       }
-      studentMap[key].totalPoints += gradePoints[g.grade];
-    }
+      studentMap[key].totalPoints += gradePoints[g.grade] || 0;
+    });
   });
 
   const categoryMap = {};
@@ -175,13 +198,17 @@ function displayTopPerformers() {
   const container = document.getElementById('top-performers-list');
   container.innerHTML = '';
 
+  if (Object.keys(categoryMap).length === 0) {
+    container.innerHTML = '<p>No performers yet.</p>';
+    return;
+  }
+
   const ul = document.createElement('ul');
-  Object.entries(categoryMap).forEach(([category, s]) => {
+  Object.entries(categoryMap).forEach(([category, student]) => {
     const li = document.createElement('li');
-    li.textContent = `${category} → ${s.name} (${s.chess}), ${s.totalPoints} pts`;
+    li.textContent = `${category} → ${student.name} (${student.chess}), ${student.totalPoints} pts`;
     ul.appendChild(li);
   });
-
   container.appendChild(ul);
 }
 
@@ -195,7 +222,7 @@ function getTeamColorClass(team) {
 
 function clearInputs() {
   document.querySelectorAll('input, select').forEach(input => input.value = '');
-  document.getElementById('category').value = '';
+  document.getElementById('grade-only-container').innerHTML = '';
 }
 
 function clearHistory() {
@@ -203,7 +230,6 @@ function clearHistory() {
     results = [];
     localStorage.removeItem('competitionResults');
     displayHistory();
-    document.getElementById('top-performers-list').innerHTML = '';
   }
 }
 

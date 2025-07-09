@@ -14,6 +14,12 @@ input, select {
   border: 1px solid #ccc;
 }
 
+.history-entry {
+  margin: 10px 0;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
 .print-button,
 .clear-button {
   margin: 10px 5px;
@@ -31,21 +37,15 @@ input, select {
   margin-bottom: 10px;
 }
 
-@media print {
-  body * {
-    visibility: hidden;
-  }
+.top-performers {
+  margin-top: 30px;
+  padding: 10px;
+  border: 1px dashed #999;
+  background: #fafafa;
+}
 
-  #print-section, #print-section * {
-    visibility: visible;
-  }
-
-  #print-section {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
+.top-performers h3 {
+  margin-bottom: 10px;
 }
 
 .team-boxes {
@@ -78,13 +78,6 @@ input, select {
   cursor: pointer;
 }
 
-.top-performers {
-  margin-top: 30px;
-  padding: 10px;
-  border: 1px dashed #999;
-  background: #fafafa;
-}
-
-.top-performers h3 {
-  margin-bottom: 10px;
+.grade-only-entry {
+  margin-bottom: 8px;
 }

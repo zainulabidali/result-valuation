@@ -75,19 +75,9 @@
     </select><br><br>
 
     <h4>Grade</h4>
-    <select id="grade-only-team">
-      <option value="">-- Select Team --</option>
-      <option>Hamdhala</option>
-      <option>Basmala</option>
-    </select>
-    <input type="text" id="grade-only-name" placeholder="Student Name" />
-    <input type="text" id="grade-only-chess" placeholder="Chess No." />
-    <select id="grade-only-grade">
-      <option value="">-- Grade --</option>
-      <option>A</option>
-      <option>B</option>
-      <option>C</option>
-    </select><br><br>
+    <div id="grade-only-container"></div>
+    <button type="button" onclick="addGradeOnlyEntry()">➕ Add Grade Entry</button>
+    <br><br>
 
     <button onclick="submitResult()">✅ Submit Result</button>
   </div>
