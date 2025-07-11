@@ -197,4 +197,72 @@ function clearHistory() {
   }
 }
 
+// New: Print only the result history + total team points + top performers
+function printSelected() {
+  const original = document.body.innerHTML;
+  const printable = document.getElementById('print-section').innerHTML;
+  document.body.innerHTML = `<div>${printable}</div>`;
+  window.print();
+  document.body.innerHTML = original;
+  location.reload();
+}
+
 displayHistory();
+
+
+function generateStudentSummary() {
+  const history = JSON.parse(localStorage.getItem("competitionResults") || "[]");
+
+  const summaryMap = {};
+
+  history.forEach(entry => {
+    const { category, event, results } = entry;
+
+    results.forEach(res => {
+      if (!res.chess || !res.name || !res.team) return;
+
+      const key = `${category}_${res.chess}`;
+
+      if (!summaryMap[key]) {
+        summaryMap[key] = {
+          category: category,
+          chessNumber: res.chess,
+          studentName: res.name,
+          events: []
+        };
+      }
+
+      summaryMap[key].events.push(`${event} (${res.position})`);
+    });
+  });
+
+  const preferredOrder = [
+    "Senior Boys",
+    "Senior Girls",
+    "Junior Boys",
+    "Junior Girls",
+    "Sub Junior Boys",
+    "Sub Junior Girls"
+  ];
+
+  const summaryList = Object.values(summaryMap).sort((a, b) => {
+    const ca = preferredOrder.indexOf(a.category);
+    const cb = preferredOrder.indexOf(b.category);
+    if (ca !== cb) return ca - cb;
+    return a.chessNumber.localeCompare(b.chessNumber);
+  });
+
+  const summaryTable = document.getElementById("student-summary-body");
+  summaryTable.innerHTML = "";
+
+  summaryList.forEach(student => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${student.category}</td>
+      <td>${student.chessNumber}</td>
+      <td>${student.studentName}</td>
+      <td>${student.events.join("<br>")}</td>
+    `;
+    summaryTable.appendChild(row);
+  });
+}
