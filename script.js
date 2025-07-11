@@ -1,3 +1,5 @@
+
+
 let results = JSON.parse(localStorage.getItem('competitionResults')) || [];
 const gradePoints = { A: 5, B: 3, C: 1 };
 
@@ -5,7 +7,7 @@ function submitResult() {
   const category = document.getElementById('category').value;
   const event = document.getElementById('event').value;
   if (!category || !event) {
-    alert('Please fill category and event.');
+    alert('ദയവായി വിഭാഗവും പരിപാടിയും ചേർക്കൂ');
     return;
   }
 
@@ -190,12 +192,18 @@ function clearInputs() {
 }
 
 function clearHistory() {
-  if (confirm("Are you sure you want to clear all data?")) {
+  document.getElementById("confirmModal").style.display = "flex";
+}
+
+function confirmClear(confirm) {
+  document.getElementById("confirmModal").style.display = "none";
+  if (confirm) {
     results = [];
     localStorage.removeItem('competitionResults');
     displayHistory();
   }
 }
+
 
 // New: Print only the result history + total team points + top performers
 function printSelected() {

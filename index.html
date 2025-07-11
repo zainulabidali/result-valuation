@@ -25,7 +25,7 @@
       <option>General Girls</option>
     </select><br>
 
-    <label>Event Name:</label>
+    <label>Program Name:</label>
     <input type="text" id="event" placeholder="e.g. Recitation" /><br><br>
 
     <h4>🥇 First Place</h4>
@@ -88,7 +88,7 @@
   <hr>
 
   <div id="print-section">
-    <h3>📋 Result History</h3>
+    <h3>📋 Results</h3>
     <div id="history-list"></div>
 
     <div class="scoreboard">
@@ -119,6 +119,18 @@
   <button onclick="generateStudentSummary()">Generate Summary</button>
   <button onclick="printStudentSummary()">🖨️ Print Result Summary</button>
 </div>
+<!-- Confirmation Modal -->
+<div id="confirmModal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <div class="modal-text">എല്ലാ ഡാറ്റയും കളയണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</div>
+    <div class="modal-actions">
+      <button onclick="confirmClear(true)" class="danger-button">അതെ, കളയൂ</button>
+      <button onclick="confirmClear(false)">ഇല്ല</button>
+    </div>
+  </div>
+</div>
+
 
 
   <div class="no-print">
@@ -128,6 +140,10 @@
 
 
   <script src="script.js"></script>
+  <script type="module" src="firebase.js"></script>
+<script type="module" src="script.js"></script>
+
+  
 </body>
 
 </html>
