@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Competition Scoring</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <h2>🎯 Competition Score Entry</h2>
@@ -81,7 +83,7 @@
 
     <button onclick="submitResult()">✅ Submit Result</button>
   </div>
-  
+
 
   <hr>
 
@@ -99,31 +101,33 @@
       <div id="top-performers-list"></div>
     </div>
   </div>
+ <div id="student-summary-section">
   <h3>📋 Student Result Summary</h3>
-<table>
-<thead>
-  <tr>
-    <th>Category</th>
-    <th>Chess No</th>
-    <th>Name</th>
-    <th>Events (Rank)</th>
-  </tr>
-</thead>
 
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Chess No</th>
+        <th>Name</th>
+        <th>Events (Rank)</th>
+      </tr>
+    </thead>
+    <tbody id="student-summary-body"></tbody>
+  </table>
 
-
-  <tbody id="student-summary-body"></tbody>
-</table>
-
-<button onclick="generateStudentSummary()">Generate Summary</button>
+  <button onclick="generateStudentSummary()">Generate Summary</button>
+  <button onclick="printStudentSummary()">🖨️ Print Result Summary</button>
+</div>
 
 
   <div class="no-print">
-<button class="print-button" onclick="printSelected()">🖨️ Print Statement</button>
+    <button class="print-button" onclick="printSelected()">🖨️ Print Statement</button>
     <button class="clear-button" onclick="clearHistory()">🗑️ Clear All</button>
   </div>
-  
+
 
   <script src="script.js"></script>
 </body>
+
 </html>

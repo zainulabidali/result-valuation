@@ -266,3 +266,13 @@ function generateStudentSummary() {
     summaryTable.appendChild(row);
   });
 }
+
+function printStudentSummary() {
+  const content = document.getElementById("student-summary-section").innerHTML;
+  const original = document.body.innerHTML;
+
+  document.body.innerHTML = `<div>${content}</div>`;
+  window.print();
+  document.body.innerHTML = original;
+  location.reload(); // reload to restore event listeners and state
+}
