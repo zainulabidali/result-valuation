@@ -12,21 +12,28 @@
   <h2>🎯 Competition Score Entry</h2>
 
   <div class="entry no-print">
-    <label>Category:</label>
-    <select id="category">
-      <option value="">-- Select Category --</option>
-      <option>Sub Junior Boys</option>
-      <option>Sub Junior Girls</option>
-      <option>Junior Boys</option>
-      <option>Junior Girls</option>
-      <option>Senior Boys</option>
-      <option>Senior Girls</option>
-      <option>General Boys</option>
-      <option>General Girls</option>
-    </select><br>
+   <div style="max-width: 400px;  padding: 20px;">
+  <label for="category">Category:</label><br>
+  <select id="category"
+    style="width: 100%; padding: 12px; font-size: 18px; border-radius: 12px; margin-top: 8px; ">
+    <option value="">-- Select Category --</option>
+    <option>kides Boys</option>
+    <option>kides Girls</option>
+    <option>Sub Junior Boys</option>
+    <option>Sub Junior Girls</option>
+    <option>Junior Boys</option>
+    <option>Junior Girls</option>
+    <option>Senior Boys</option>
+    <option>Senior Girls</option>
+    <option>General Boys</option>
+    <option>General Girls</option>
+  </select><br><br>
 
-    <label>Program Name:</label>
-    <input type="text" id="event" placeholder="e.g. Recitation" /><br><br>
+  <label for="event">Program Name:</label><br>
+  <input type="text" id="event" placeholder="e.g. Recitation"
+    style="width: 100%; padding: 12px; font-size: 18px; border-radius: 12px; margin-top: 8px; " />
+</div>
+
 
     <h4>🥇 First Place</h4>
     <select id="first-team">
@@ -76,7 +83,7 @@
       <option>C</option>
     </select><br><br>
 
-    <h4>Grade</h4>
+    <h4>Other Grade</h4>
     <div id="grade-only-container"></div>
     <button type="button" onclick="addGradeOnlyEntry()">➕ Add Grade Entry</button>
     <br><br>
@@ -140,8 +147,8 @@
 
 
   <script src="script.js"></script>
-  <script type="module" src="firebase.js"></script>
-<script type="module" src="script.js"></script>
+  <!-- <script type="module" src="firebase.js"></script> -->
+<!-- <script type="module" src="script.js"></script> -->
 
   
 </body>
