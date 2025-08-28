@@ -54,7 +54,7 @@ function addGradeOnlyEntry() {
   const div = document.createElement('div');
   div.className = 'grade-only-entry';
   div.innerHTML = `
-    <select><option value="">-- Select Team --</option><option>Hamdhala</option><option>Basmala</option></select>
+    <select><option value="">-- Select Team --</option><option>MARJAN</option><option>RAYHAN</option></select>
     <input type="text" placeholder="Student Name" />
     <input type="text" placeholder="Chess No." />
     <select><option value="">-- Grade --</option><option>A</option><option>B</option><option>C</option></select>
@@ -136,7 +136,7 @@ function displayTeamPoints() {
 
   Object.entries(map).sort((a, b) => b[1] - a[1]).forEach(([team, pts]) => {
     const d = document.createElement('div');
-    d.className = 'team-card ' + (team.toLowerCase() === 'basmala' ? 'team-blue' : 'team-green');
+    d.className = 'team-card ' + (team.toLowerCase() === 'RAYHAN' ? 'team-blue' : 'team-green');
     d.textContent = `${team}: ${pts} pts`;
     c.appendChild(d);
   });

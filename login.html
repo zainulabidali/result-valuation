@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+</head>
+<body>
+  <h2>🔐 Login</h2>
+
+  <input type="email" id="email" placeholder="Enter email"><br><br>
+  <input type="password" id="password" placeholder="Enter password"><br><br>
+  <button id="loginBtn">Login</button>
+  <p id="error" style="color:red;"></p>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBBPJoxeLHOQk4j_7HE1hXRUunzY91CQY0",
+      authDomain: "competition-score-entry.firebaseapp.com",
+      projectId: "competition-score-entry",
+      storageBucket: "competition-score-entry.appspot.com",
+      messagingSenderId: "1018065208211",
+      appId: "1:1018065208211:web:ba616a7697f61bc2c15e66"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          window.location.href = "index.html";
+        })
+        .catch(error => {
+          document.getElementById("error").textContent = error.message;
+        });
+    });
+  </script>
+</body>
+</html>
